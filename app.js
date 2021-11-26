@@ -2,7 +2,7 @@ const fs = require('fs');
 const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
-
+const notes = require('./notes.js');
 const log = console.log;
 
 yargs.version = '1.1.0';
@@ -24,8 +24,7 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        log(`Note Title : ${argv.title}`);
-        log(`Note Body : ${argv.body}`);
+        notes.addNotes(argv.title, argv.body)
     }
 })
 
@@ -42,7 +41,7 @@ yargs.command({
     command: 'list',
     describe: 'List all notes',
     handler: function () {
-        log('Listing Notes');
+        notes.getNotes()
     }
 })
 
