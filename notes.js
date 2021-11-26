@@ -9,7 +9,6 @@ const getNotes = function () {
 
 const addNotes = function (title, body) {
     const notes = loadNotes();
-    console.table(notes);
     const duplicateNotes = notes.filter(note => {
         return note.title === title;
     })
@@ -25,7 +24,14 @@ const addNotes = function (title, body) {
     }
 
 }
-
+//Remove the notes 
+const removeNote = (title) => {
+    const notes = loadNotes();
+    const removedNotes = notes.filter(note => {
+        return note.title !== title;
+    })
+    saveNotes(removedNotes);
+}
 
 const loadNotes = function () {
     try {
@@ -41,4 +47,4 @@ const saveNotes = (notes) => {
     const dataJson = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJson)
 }
-module.exports = { getNotes: getNotes, addNotes: addNotes }
+module.exports = { getNotes: getNotes, addNotes: addNotes, removeNote: removeNote, }
